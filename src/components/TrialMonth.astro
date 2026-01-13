@@ -55,7 +55,7 @@
                   </svg>
                 </div>
                 <div>
-                  <span class="font-semibold text-[#010101]">Hasta 1000 comprobantes gratis</span>
+                  <span class="font-semibold text-[#010101]">Hasta 6000 comprobantes gratis</span>
                   <p class="text-sm text-[#010101]/60">Facturas, boletas y notas de crédito</p>
                 </div>
               </li>
@@ -66,7 +66,7 @@
                   </svg>
                 </div>
                 <div>
-                  <span class="font-semibold text-[#010101]">Soporte técnico personalizado</span>
+                  <span class="font-semibold text-[#010101]">Soporte técnico</span>
                   <p class="text-sm text-[#010101]/60">Te ayudamos en todo el proceso</p>
                 </div>
               </li>
@@ -109,7 +109,7 @@
               <div class="bg-white/10 rounded-xl p-4 mb-6">
                 <div class="text-sm text-white/80 mb-1">Valor de la prueba</div>
                 <div class="text-2xl font-bold">
-                  <span class="line-through text-white/50 mr-2">S/. 149</span>
+                  <span class="line-through text-white/50 mr-2">S/. 119</span>
                   <span class="text-[#FFD700]">GRATIS</span>
                 </div>
               </div>
@@ -134,28 +134,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Bottom Stats -->
-        <div class="relative z-10 mt-10 pt-8 border-t border-gray-200">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>
-              <div class="text-2xl sm:text-3xl font-black text-[#3E37FC]">+50</div>
-              <div class="text-sm text-[#010101]/60">Empresas en prueba</div>
-            </div>
-            <div>
-              <div class="text-2xl sm:text-3xl font-black text-[#3E37FC]">95%</div>
-              <div class="text-sm text-[#010101]/60">Tasa de conversión</div>
-            </div>
-            <div>
-              <div class="text-2xl sm:text-3xl font-black text-[#3E37FC]">5 min</div>
-              <div class="text-sm text-[#010101]/60">Activación rápida</div>
-            </div>
-            <div>
-              <div class="text-2xl sm:text-3xl font-black text-[#3E37FC]">24/7</div>
-              <div class="text-sm text-[#010101]/60">Soporte disponible</div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- FAQ Mini -->
@@ -171,3 +149,121 @@
   </div>
 </section>
 
+<script>
+  // Definir los beneficios de cada plan
+  const planBenefits = {
+    basico: {
+      plan: "Básico",
+      comprobantes: "1,500",
+      features: [
+        "Módulo de ventas completo",
+        "Reportes básicos de facturación",
+        "Búsqueda de RUC y DNI",
+        "Duplicar y copiar documentos",
+        "1 sucursal y 1 almacén",
+        "1 usuario del sistema"
+      ],
+      price: "59"
+    },
+    emprendedor: {
+      plan: "Emprendedor",
+      comprobantes: "3,000",
+      features: [
+        "Todo lo del plan Básico",
+        "Módulo de compras integrado",
+        "Búsqueda avanzada de comprobantes",
+        "Kardex físico y valorizado",
+        "Ingresos y salidas de almacén",
+        "Hasta 3 usuarios simultáneos"
+      ],
+      price: "99"
+    },
+    empresarial: {
+      plan: "Empresarial",
+      comprobantes: "Ilimitados",
+      features: [
+        "Todo lo del plan Emprendedor",
+        "Reportes avanzados y personalizados",
+        "Traslado entre almacenes",
+        "Guías de remisión electrónicas",
+        "Libros electrónicos (PLE)",
+        "API REST para integraciones",
+        "Usuarios ilimitados"
+      ],
+      price: "119"
+    }
+  };
+
+  // Función para actualizar el contenido del trial según el plan seleccionado
+  function updateTrialContent(planKey: string) {
+    const plan = planBenefits[planKey as keyof typeof planBenefits];
+    if (!plan) return;
+
+    // Actualizar el nombre del plan
+    const planNameEl = document.getElementById('trial-plan-name');
+    if (planNameEl) planNameEl.textContent = plan.plan;
+
+    // Actualizar los comprobantes
+    const comprobantesEl = document.getElementById('trial-comprobantes');
+    if (comprobantesEl) comprobantesEl.textContent = plan.comprobantes;
+
+    // Actualizar el precio
+    const priceEl = document.getElementById('trial-price');
+    if (priceEl) priceEl.textContent = plan.price;
+
+    // Actualizar la lista de características
+    const featuresList = document.getElementById('trial-features-list');
+    if (featuresList) {
+      featuresList.innerHTML = plan.features.map(feature => `
+        <li class="flex items-start gap-3">
+          <div class="w-6 h-6 bg-[#3E37FC]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-[#3E37FC]" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <span class="text-sm text-[#010101]/80">${feature}</span>
+        </li>
+      `).join('');
+    }
+
+    // Actualizar el enlace de WhatsApp
+    const ctaButton = document.getElementById('trial-cta-button');
+    if (ctaButton) {
+      ctaButton.setAttribute('href',
+        `https://wa.me/51913346183?text=Hola,%20quiero%20activar%20mi%20mes%20de%20prueba%20gratis%20del%20plan%20${plan.plan}%20en%20RappiFact`
+      );
+    }
+
+    // Guardar el plan seleccionado
+    const section = document.getElementById('free-trial');
+    if (section) {
+      section.setAttribute('data-selected-plan', planKey);
+    }
+  }
+
+  // Escuchar eventos personalizados para cambiar el plan
+  document.addEventListener('DOMContentLoaded', () => {
+    // Escuchar clics en los botones de los planes de la sección Pricing
+    document.querySelectorAll('[data-plan-cta]').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const planName = target.getAttribute('data-plan-cta');
+        if (planName) {
+          const planKey = planName.toLowerCase();
+          updateTrialContent(planKey);
+
+          // Scroll suave a la sección de prueba gratis
+          const trialSection = document.getElementById('free-trial');
+          if (trialSection) {
+            trialSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+
+    // Inicializar con el plan por defecto (emprendedor)
+    const section = document.getElementById('free-trial');
+    const defaultPlan = section?.getAttribute('data-selected-plan') || 'emprendedor';
+    updateTrialContent(defaultPlan);
+  });
+</script>
