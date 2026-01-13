@@ -1,25 +1,32 @@
 ---
 const modules = [
   {
-    title: "Emitir Factura",
-    description: "Busca clientes por RUC o DNI automáticamente y emite facturas en segundos. Los datos del cliente se completan al instante desde la SUNAT.",
+    title: "Emitir Comprobantes",
+    description: "Busca clientes por RUC o DNI automáticamente y emite facturas, boletas, notas de venta o cotizaciones en segundos. Los datos del cliente se completan al instante desde la SUNAT.",
     media: "/emitirFactura.mp4",
     isVideo: true,
     features: ["Búsqueda automática por RUC/DNI", "Autocompletado de datos", "Emisión rápida y segura"]
   },
   {
-    title: "Caja Chica",
-    description: "Gestiona los gastos menores de tu empresa de forma organizada. Controla entradas, salidas y genera reportes detallados de movimientos.",
-    media: "/cajaChica.png",
-    isVideo: false,
-    features: ["Control de gastos diarios", "Reportes de movimientos", "Cuadre de caja automático"]
+    title: "Agregar Productos",
+    description: "Registra y gestiona tu catálogo de productos de forma rápida y sencilla. Controla precios, stock y categorías desde un solo lugar.",
+    media: "/addNewProduct.mp4",
+    isVideo: true,
+    features: ["Registro rápido de productos", "Control de precios y stock", "Organización por categorías"]
   },
   {
     title: "Punto de Venta",
     description: "Sistema de punto de venta intuitivo y rápido. Gestiona ventas, productos e inventario desde una interfaz sencilla y moderna.",
-    media: "/puntoDeVenta.png",
-    isVideo: false,
+    media: "/puntoVenta.mp4",
+    isVideo: true,
     features: ["Ventas rápidas y sencillas", "Control de inventario", "Reportes de ventas"]
+  },
+  {
+    title: "Registro de Comprobantes",
+    description: "Visualiza el historial completo de tus comprobantes emitidos. Consulta facturas, boletas, cotizaciones y notas de venta con todos sus detalles.",
+    media: "/verBoleta.mp4",
+    isVideo: true,
+    features: ["Envío por Email y WhatsApp", "Firma XML y envío a SUNAT", "Descarga de CDR y PDF"]
   }
 ];
 ---
@@ -48,28 +55,28 @@ const modules = [
         <div class={`scroll-reveal grid lg:grid-cols-2 gap-8 lg:gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
           <!-- Media (Video or Image) -->
           <div class={`${index % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
-            <div class="rounded-3xl overflow-hidden shadow-[0_10px_50px_rgba(62,55,252,0.15)] border border-[#3E37FC]/10 bg-gradient-to-br from-[#f8f7ff] to-white hover:shadow-[0_15px_60px_rgba(62,55,252,0.25)] transition-all duration-500 hover:-translate-y-1">
-              {module.isVideo ? (
-                <video
-                  src={module.media}
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  disablepictureinpicture
-                  controlslist="nodownload nofullscreen noremoteplayback"
-                  class="w-full h-auto rounded-2xl shadow-lg"
-                >
-                  Tu navegador no soporta videos.
-                </video>
-              ) : (
+            {module.isVideo ? (
+              <video
+                src={module.media}
+                autoplay
+                loop
+                muted
+                playsinline
+                disablepictureinpicture
+                controlslist="nodownload nofullscreen noremoteplayback"
+                class="w-full h-auto rounded-2xl shadow-[0_10px_50px_rgba(62,55,252,0.15)] hover:shadow-[0_15px_60px_rgba(62,55,252,0.25)] transition-all duration-500 hover:-translate-y-1"
+              >
+                Tu navegador no soporta videos.
+              </video>
+            ) : (
+              <div class="rounded-2xl overflow-hidden shadow-[0_10px_50px_rgba(62,55,252,0.15)] hover:shadow-[0_15px_60px_rgba(62,55,252,0.25)] transition-all duration-500 hover:-translate-y-1">
                 <img
                   src={module.media}
                   alt={`Módulo ${module.title} - RappiFact`}
-                  class="w-full h-auto rounded-2xl"
+                  class="w-full h-auto"
                 />
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           <!-- Content -->
